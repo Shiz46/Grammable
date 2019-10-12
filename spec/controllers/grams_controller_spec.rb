@@ -2,6 +2,25 @@ require 'rails_helper'
 
 RSpec.describe GramsController, type: :controller do
 
+  describe "grams#destroy action" do 
+    it "should allow a user to destroy grams" do 
+      #need a gram to exist in the database
+      gram = FactoryBot.create(:gram)
+      #when someone perform a DELETE HTTP request to our destroy action and specify the id of the gram that we built with FactoryBot.
+      delete :destroy, params: { id: gram.id }
+      #expect the response to redirect to the root path. 
+      expect(response).to redirect_to root_path
+      #gram no longer exists in our database by fetching the record with the find_by_id method.
+      gram = Gram.find_by_id(gram.id)
+      expect(gram).to eq nil
+    end
+
+    it "should return a 404 message if we cannot find a gram with the id that is specified" do 
+      delete :destroy, params: { id: 'SPACEDUCK'}
+      expect(response).to have_http_status(:not_found)
+    end 
+  end 
+
 #how update form submissions work 
 # gram needs to exit in our database with the message of "Initial Value"
 #When a user submits the gram edit form and performs a PATCH HTTP request to a URL that looks like /grams/:id with the message "changed"
