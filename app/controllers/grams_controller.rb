@@ -45,6 +45,7 @@ class GramsController < ApplicationController
 
   def create 
     @gram = current_user.grams.create(gram_params)
+
     if @gram.valid?
     redirect_to root_path
     else 
@@ -58,9 +59,6 @@ class GramsController < ApplicationController
     params.require(:gram).permit(:message, :picture)
   end 
 
-  def render_not_found(status=:not_found)
-    render plain: "#{status.to_s.titleize} :(", status: status
-  end 
 end
 
 #Red/Green/Refractor: write a failing test first, make it past, then improve the code quality after.
