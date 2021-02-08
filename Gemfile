@@ -80,7 +80,7 @@ end
 gem 'simple_form'
 gem 'devise'
 gem 'factory_bot_rails'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'hirb'
 gem 'figaro'
 gem 'fog-aws'
